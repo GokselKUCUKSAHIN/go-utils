@@ -1,4 +1,4 @@
-package constants
+package go_utils
 
 import "golang.org/x/exp/constraints"
 

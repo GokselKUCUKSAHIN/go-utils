@@ -1,5 +1,5 @@
 module github.com/GokselKUCUKSAHIN/go-utils
 
-go 1.18
+go 1.19
 
 require golang.org/x/exp v0.0.0-20230126173853-a67bb567ff2e
