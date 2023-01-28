@@ -1,6 +1,42 @@
 package big_sense
 
-import "math/big"
+import (
+	"fmt"
+	"golang.org/x/exp/constraints"
+	"math/big"
+)
+
+type Number interface {
+	constraints.Float | constraints.Integer
+}
+
+func ValueOf[T Number](number T) *big.Int {
+	int64Value := int64(number)
+	return big.NewInt(int64Value)
+}
+
+func FromStringBase(number string, base int) (*big.Int, error) {
+	if base < 2 {
+		return nil, fmt.Errorf("big_sense: base can-not be less than 2. base %v", base)
+	}
+	n := new(big.Int)
+	if n, ok := n.SetString(number, base); ok {
+		return n, nil
+	}
+	return nil, fmt.Errorf("big_sense: '%v' convertion can-not be done", number)
+}
+
+func FromString(number string) (*big.Int, error) {
+	return FromStringBase(number, 10)
+}
+
+func Zero() *big.Int {
+	return big.NewInt(0)
+}
+
+func One() *big.Int {
+	return big.NewInt(1)
+}
 
 func Add(first *big.Int, second *big.Int) *big.Int {
 	return big.NewInt(0).Add(first, second)
