@@ -10,6 +10,7 @@ type Number interface {
 	constraints.Float | constraints.Integer
 }
 
+// ValueOf takes int or float  and returns a new Int sets to integer part of the number.
 func ValueOf[T Number](number T) *big.Int {
 	int64Value := int64(number)
 	return big.NewInt(int64Value)
@@ -30,20 +31,22 @@ func FromString(number string) (*big.Int, error) {
 	return FromStringBase(number, 10)
 }
 
+// Zero returns immediate 0 value big.Int
 func Zero() *big.Int {
 	return big.NewInt(0)
 }
 
+// One returns immediate 1 value big.Int
 func One() *big.Int {
 	return big.NewInt(1)
 }
 
 func Add(first *big.Int, second *big.Int) *big.Int {
-	return big.NewInt(0).Add(first, second)
+	return Zero().Add(first, second)
 }
 
 func AddAll(first *big.Int, rest ...*big.Int) *big.Int {
-	sum := big.NewInt(0).Add(big.NewInt(0), first)
+	sum := Zero().Add(Zero(), first)
 	size := len(rest)
 	for i := 0; i < size; i++ {
 		sum = sum.Add(sum, rest[i])
@@ -52,15 +55,15 @@ func AddAll(first *big.Int, rest ...*big.Int) *big.Int {
 }
 
 func Sub(first *big.Int, second *big.Int) *big.Int {
-	return big.NewInt(0).Sub(first, second)
+	return Zero().Sub(first, second)
 }
 
 func Mul(first *big.Int, second *big.Int) *big.Int {
-	return big.NewInt(0).Mul(first, second)
+	return One().Mul(first, second)
 }
 
 func MulAll(first *big.Int, rest ...*big.Int) *big.Int {
-	total := big.NewInt(1).Mul(big.NewInt(1), first)
+	total := One().Mul(One(), first)
 	size := len(rest)
 	for i := 0; i < size; i++ {
 		total = total.Mul(total, rest[i])
@@ -68,6 +71,10 @@ func MulAll(first *big.Int, rest ...*big.Int) *big.Int {
 	return total
 }
 
+func MulRange(a, b int64) *big.Int {
+	return One().MulRange(a, b)
+}
+
 func Div(dividend *big.Int, divisor *big.Int) *big.Int {
-	return big.NewInt(0).Div(dividend, divisor)
+	return One().Div(dividend, divisor)
 }
