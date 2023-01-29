@@ -54,7 +54,7 @@ func One() *big.Int {
 	return ValueOf(1)
 }
 
-func Add(first *big.Int, second *big.Int) *big.Int {
+func Add(first, second *big.Int) *big.Int {
 	return Empty().Add(first, second)
 }
 
@@ -66,11 +66,11 @@ func AddAll(first *big.Int, rest ...*big.Int) *big.Int {
 	return sum
 }
 
-func Sub(first *big.Int, second *big.Int) *big.Int {
+func Sub(first, second *big.Int) *big.Int {
 	return Empty().Sub(first, second)
 }
 
-func Mul(first *big.Int, second *big.Int) *big.Int {
+func Mul(first, second *big.Int) *big.Int {
 	return Empty().Mul(first, second)
 }
 
@@ -86,7 +86,7 @@ func MulRange(a, b int64) *big.Int {
 	return Empty().MulRange(a, b)
 }
 
-func Div(dividend *big.Int, divisor *big.Int) *big.Int {
+func Div(dividend, divisor *big.Int) *big.Int {
 	return Empty().Div(dividend, divisor)
 }
 
