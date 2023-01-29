@@ -20,15 +20,15 @@ func Values[K constraints.Ordered, V any](source map[K]V) []V {
 	return resultValues
 }
 
-type keyValuePair[K constraints.Ordered, V any] struct {
+type KeyValuePair[K constraints.Ordered, V any] struct {
 	Key   K
 	Value V
 }
 
-func Entries[K constraints.Ordered, V any](source map[K]V) []keyValuePair[K, V] {
-	resultValues := make([]keyValuePair[K, V], 0, len(source))
+func Entries[K constraints.Ordered, V any](source map[K]V) []KeyValuePair[K, V] {
+	resultValues := make([]KeyValuePair[K, V], 0, len(source))
 	for k, v := range source {
-		resultValues = append(resultValues, keyValuePair[K, V]{Key: k, Value: v})
+		resultValues = append(resultValues, KeyValuePair[K, V]{Key: k, Value: v})
 	}
 	return resultValues
 }

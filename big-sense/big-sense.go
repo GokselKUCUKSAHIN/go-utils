@@ -12,8 +12,12 @@ type Number interface {
 
 // ValueOf takes int or float  and returns a new Int sets to integer part of the number.
 func ValueOf[T Number](number T) *big.Int {
-	int64Value := int64(number)
-	return big.NewInt(int64Value)
+	return Empty().SetInt64(int64(number))
+}
+
+// Val is allias of ValueOf
+func Val[T Number](number T) *big.Int {
+	return ValueOf(number)
 }
 
 func FromStringBase(number string, base int) (*big.Int, error) {
@@ -31,18 +35,27 @@ func FromString(number string) (*big.Int, error) {
 	return FromStringBase(number, 10)
 }
 
+// Atobi ASCII to Big Int. Allias of FromString.
+func Atobi(number string) (*big.Int, error) {
+	return FromString(number)
+}
+
+func Empty() *big.Int {
+	return new(big.Int)
+}
+
 // Zero returns immediate 0 value big.Int
 func Zero() *big.Int {
-	return big.NewInt(0)
+	return ValueOf(0)
 }
 
 // One returns immediate 1 value big.Int
 func One() *big.Int {
-	return big.NewInt(1)
+	return ValueOf(1)
 }
 
 func Add(first *big.Int, second *big.Int) *big.Int {
-	return Zero().Add(first, second)
+	return Empty().Add(first, second)
 }
 
 func AddAll(first *big.Int, rest ...*big.Int) *big.Int {
@@ -54,11 +67,11 @@ func AddAll(first *big.Int, rest ...*big.Int) *big.Int {
 }
 
 func Sub(first *big.Int, second *big.Int) *big.Int {
-	return Zero().Sub(first, second)
+	return Empty().Sub(first, second)
 }
 
 func Mul(first *big.Int, second *big.Int) *big.Int {
-	return One().Mul(first, second)
+	return Empty().Mul(first, second)
 }
 
 func MulAll(first *big.Int, rest ...*big.Int) *big.Int {
@@ -70,9 +83,17 @@ func MulAll(first *big.Int, rest ...*big.Int) *big.Int {
 }
 
 func MulRange(a, b int64) *big.Int {
-	return One().MulRange(a, b)
+	return Empty().MulRange(a, b)
 }
 
 func Div(dividend *big.Int, divisor *big.Int) *big.Int {
-	return One().Div(dividend, divisor)
+	return Empty().Div(dividend, divisor)
+}
+
+func Sqrt(number *big.Int) *big.Int {
+	return Empty().Sqrt(number)
+}
+
+func Cmp(x, y *big.Int) int {
+	return x.Cmp(y)
 }
