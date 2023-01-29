@@ -46,10 +46,9 @@ func Add(first *big.Int, second *big.Int) *big.Int {
 }
 
 func AddAll(first *big.Int, rest ...*big.Int) *big.Int {
-	sum := Zero().Add(Zero(), first)
-	size := len(rest)
-	for i := 0; i < size; i++ {
-		sum = sum.Add(sum, rest[i])
+	sum := first
+	for _, rest := range rest {
+		sum = sum.Add(sum, rest)
 	}
 	return sum
 }
@@ -63,10 +62,9 @@ func Mul(first *big.Int, second *big.Int) *big.Int {
 }
 
 func MulAll(first *big.Int, rest ...*big.Int) *big.Int {
-	total := One().Mul(One(), first)
-	size := len(rest)
-	for i := 0; i < size; i++ {
-		total = total.Mul(total, rest[i])
+	total := first
+	for _, rest := range rest {
+		total = Mul(total, rest)
 	}
 	return total
 }
