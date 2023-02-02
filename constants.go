@@ -47,3 +47,7 @@ func (base KeyValueStore) IsExist(key string) bool {
 	_, exist := base[key]
 	return exist
 }
+
+func (base KeyValueStore) Size() int {
+	return len(base)
+}
